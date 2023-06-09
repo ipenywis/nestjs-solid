@@ -4,6 +4,6 @@ import { Injectable } from '@nestjs/common';
 export class EmailsService {
   public async sendOrderEmail(orderId: number) {
     console.log(`Sending order email for order ${orderId}`);
-    //TODO: Send Email here...
+    //TODO: Send Email logic here...
   }
 }
