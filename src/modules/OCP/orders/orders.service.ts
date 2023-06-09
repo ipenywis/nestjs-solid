@@ -1,13 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { EmailsService } from '../emails/emails.service';
 import { Order, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class OrdersService {
   constructor(
-    private prisma: PrismaService,
-    private emailsService: EmailsService,
+    private prisma: PrismaService, // private emailsService: EmailsService,
   ) {}
 
   async submitOrder(data: Prisma.OrderCreateInput): Promise<Order> {
@@ -18,7 +16,7 @@ export class OrdersService {
     //❌ Bad
     //Here we'are sending Order email inside the OrdersService which should
     //Have one responsibility (Taking care of Orders)
-    this.emailsService.sendOrderEmail(createdOrder.orderId);
+    // this.emailsService.sendOrderEmail(createdOrder.orderId);
 
     return createdOrder;
   }

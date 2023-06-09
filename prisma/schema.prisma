@@ -20,4 +20,5 @@ model Product {
 model Order {
   orderId      Int      @id @default(autoincrement())
   products     Product[] @relation("ProductOrders")
+  totalPrice  Int @default(0)
 }

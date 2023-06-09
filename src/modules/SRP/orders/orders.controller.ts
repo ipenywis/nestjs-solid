@@ -17,7 +17,7 @@ export class OrdersController {
 
   @Post()
   public async submitOrder(@Body() submitOrderDto: SubmitOrderDto) {
-    const createdOrder: any = await this.ordersService.submitOrder({
+    const createdOrder = await this.ordersService.submitOrder({
       products: { connect: [{ productId: submitOrderDto.productId }] },
     });
 
@@ -25,5 +25,10 @@ export class OrdersController {
     //Services should allow us to share code between modules easily and effortlessly
     //Each Service method should follow a SRP
     await this.emailsService.sendOrderEmail(createdOrder.orderId);
+
+    return {
+      message: 'Thanks for you order!',
+      orderNumber: createdOrder.orderId,
+    };
   }
 }
