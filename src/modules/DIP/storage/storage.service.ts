@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 const s3: any = {};
+const cloudStorage: any = {};
 
 @Injectable()
 //Bad ❌
@@ -23,7 +24,22 @@ export class StorageService {
       }
     });
   }
+
+  public async findGoogleCloudStorageFile(filename: string) {
+    //Google Cloud Storage specific implementation
+    //To adhere to DIP
+    // Get the file reference
+    const bucket = cloudStorage.bucket('STORAGE');
+    const file = bucket.file(filename);
+
+    // Download the file
+    const [fileContent] = await file.download();
+
+    return fileContent;
+  }
 }
+
+//-------------------------------------------------------------------------------------
 
 //Good ✅
 //Use an abstract class to provide a common structure for different implementations

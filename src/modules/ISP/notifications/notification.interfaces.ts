@@ -1,14 +1,13 @@
 //Bad ❌
 //Not seperating the concerns
 export interface Notification {
-  to: string;
-  subject: string;
-  body: string;
-  phoneNumber: string;
-  message: string;
-  userId: string;
-  title: string;
-  // body: string;
+  to?: string; //< for email
+  subject?: string; //< for email
+  body?: string; //< for email & push
+  phoneNumber?: string; //< for sms
+  message?: string; //< for sms
+  userId?: string; //< for push
+  title?: string; //< for push
 }
 
 //Good ✅

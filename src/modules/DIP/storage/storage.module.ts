@@ -7,6 +7,9 @@ import { StorageCSFetcherService } from './storage-cs-fetcher.service';
 //Inject Different types of Storage implementations depending on what you need!
 @Module({
   controllers: [StorageController],
-  providers: [{ provide: StorageService, useClass: StorageCSFetcherService }],
+  providers: [
+    // { provide: StorageService, useClass: StorageS3FetcherService },
+    StorageS3FetcherService,
+  ],
 })
 export class StorageModule {}

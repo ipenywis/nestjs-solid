@@ -2,8 +2,8 @@ import { Order } from '@prisma/client';
 
 // ✅ Good
 //Extending the payment service without modifying existing code (Open-Closed Principle)
-export interface PaymentGateway {
-  processPayment(order: Order): void;
+export abstract class PaymentGateway {
+  abstract processPayment(order: Order): void;
 }
 
 export class CreditCardGateway implements PaymentGateway {
@@ -23,6 +23,13 @@ export class BitcoinGateway implements PaymentGateway {
     // Process Bitcoin payment
   }
 }
+
+//Maybe you want to add support for a new payment Method 🤔 👇
+// export class ApplePayGateway implements PaymentGateway {
+//   processPayment(order: Order): void {
+//     // Process ApplePay payment
+//   }
+// }
 
 export enum PAYMENT_METHOD {
   CREDIT_CARD = 'credit-card',

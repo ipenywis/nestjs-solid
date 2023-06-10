@@ -5,14 +5,12 @@ import { PricingService } from './pricing.service';
 @Injectable()
 //Bad ❌
 export class BadSalePricingStrategy extends PricingService {
-  calculatePrice(basePrice: number): number {
-    // Logic to calculate the sale price
-    return basePrice * 0.8; // 20% discount
-  }
+  //You can just rely on the base implementation from PricingService
+  //Without being forced to have a specific implementation for SalePricing
 }
 
 @Injectable()
-//Bad ❌
+//Good ✅
 export class SalePricingStrategy implements PricingService {
   calculatePrice(basePrice: number): number {
     // Logic to calculate the sale price
