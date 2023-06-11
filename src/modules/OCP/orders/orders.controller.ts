@@ -1,6 +1,8 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { IsNumber } from 'class-validator';
+import { PaymentService } from '../payment/payment.service';
+import { CreditCardGateway, PAYMENT_METHOD } from '../payment/payment.gateway';
 
 class SubmitOrderDto {
   @IsNumber()
@@ -9,17 +11,10 @@ class SubmitOrderDto {
 
 @Controller('/orders')
 export class OrdersController {
-  constructor(private ordersService: OrdersService) {}
-
-  @Post()
-  public async submitOrder(@Body() submitOrderDto: SubmitOrderDto) {
-    const createdOrder: any = await this.ordersService.submitOrder({
-      products: { connect: [{ productId: submitOrderDto.productId }] },
-    });
-
-    //✅ Good
-    //Services should allow us to share code between modules easily and effortlessly
-    //Each Service method should follow a SRP
-    // await this.emailsService.sendOrderEmail(createdOrder.orderId);
+  constructor(private paymentService: PaymentService) {
+    this.paymentService.registerPaymentGateway(
+      PAYMENT_METHOD.CREDIT_CARD,
+      new CreditCardGateway(),
+    );
   }
 }

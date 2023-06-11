@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { StorageController } from './storage.controller';
-import { StorageService } from './storage.service';
+import { StorageFetcher, StorageService } from './storage.service';
 import { StorageS3FetcherService } from './storage-s3-fetcher.service';
 import { StorageCSFetcherService } from './storage-cs-fetcher.service';
 
@@ -8,8 +8,8 @@ import { StorageCSFetcherService } from './storage-cs-fetcher.service';
 @Module({
   controllers: [StorageController],
   providers: [
-    // { provide: StorageService, useClass: StorageS3FetcherService },
-    StorageS3FetcherService,
+    { provide: StorageFetcher, useClass: StorageCSFetcherService },
+    // StorageS3FetcherService,
   ],
 })
 export class StorageModule {}

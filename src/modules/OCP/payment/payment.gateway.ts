@@ -25,11 +25,11 @@ export class BitcoinGateway implements PaymentGateway {
 }
 
 //Maybe you want to add support for a new payment Method 🤔 👇
-// export class ApplePayGateway implements PaymentGateway {
-//   processPayment(order: Order): void {
-//     // Process ApplePay payment
-//   }
-// }
+export class ApplePayGateway implements PaymentGateway {
+  processPayment(order: Order): void {
+    // Process ApplePay payment
+  }
+}
 
 export enum PAYMENT_METHOD {
   CREDIT_CARD = 'credit-card',
